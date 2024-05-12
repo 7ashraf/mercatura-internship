@@ -1,0 +1,1 @@
+D:\mercatura-internship\rust-sandbox\target\debug\rust-sandbox.exe: D:\mercatura-internship\rust-sandbox\src\exercise.rs D:\mercatura-internship\rust-sandbox\src\main.rs D:\mercatura-internship\rust-sandbox\src\print.rs
