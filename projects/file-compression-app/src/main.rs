@@ -1,6 +1,6 @@
 extern crate flate2;
 
-use flate::write::GzEncoder;
+use flate2::write::GzEncoder;
 use flate2::Compression;
 use std::fs::File;
 use std::env::args;

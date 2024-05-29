@@ -1,9 +1,0 @@
-D:\mercatura-internship\car_project\car_project\target\debug\deps\libonce_cell-cdfa8588fc406c03.rmeta: C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\lib.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\imp_std.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\race.rs
-
-D:\mercatura-internship\car_project\car_project\target\debug\deps\libonce_cell-cdfa8588fc406c03.rlib: C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\lib.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\imp_std.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\race.rs
-
-D:\mercatura-internship\car_project\car_project\target\debug\deps\once_cell-cdfa8588fc406c03.d: C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\lib.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\imp_std.rs C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\race.rs
-
-C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\lib.rs:
-C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\imp_std.rs:
-C:\Users\winzmaker\.cargo\registry\src\index.crates.io-6f17d22bba15001f\once_cell-1.19.0\src\race.rs:
