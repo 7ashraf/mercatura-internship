@@ -1,0 +1,11 @@
+Customer ID,First Name,Last Name,Email,Phone Number,Street Address,City,State,Zip Code,Date of Birth,Gender,Account Created Date
+1,John,Doe,johndoe@example.com,555-1234,123 Elm St,Anytown,CA,90210,1980-01-01,Male,2023-01-15
+2,Jane,Smith,janesmith@example.com,555-5678,456 Oak St,Somewhere,NY,10001,1990-02-02,Female,2023-02-15
+3,Bob,Johnson,bobjohnson@example.com,555-8765,789 Pine St,Elsewhere,TX,75001,1985-03-03,Male,2023-03-15
+4,Alice,Williams,alicewilliams@example.com,555-4321,101 Maple St,Anothercity,FL,33101,1975-04-04,Female,2023-04-15
+5,Charlie,Brown,charliebrown@example.com,555-6789,202 Cedar St,Yourtown,WA,98101,1995-05-05,Male,2023-05-15
+6,Eve,Davis,evedavis@example.com,555-9876,303 Birch St,Mycity,IL,60601,1988-06-06,Female,2023-06-15
+7,Frank,Wilson,frankwilson@example.com,555-5432,404 Spruce St,Thistown,MA,02101,1982-07-07,Male,2023-07-15
+8,Grace,Lee,gracelee@example.com,555-2109,505 Redwood St,Thatcity,GA,30301,1992-08-08,Female,2023-08-15
+9,Hank,Martinez,hankmartinez@example.com,555-6543,606 Cherry St,Thattown,OH,44101,1978-09-09,Male,2023-09-15
+10,Ivy,Lewis,ivylewis@example.com,555-0987,707 Walnut St,Somecity,OR,97201,1987-10-10,Female,2023-10-15
