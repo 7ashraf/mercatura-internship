@@ -1,8 +1,11 @@
 [package]
-name = "basic-auth-app"
+name = "link-extractor-app"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-reqwest = {version = "0.12.4", features = ["blocking"]}
+tempfile = "3.3.0"
+error-chain = "0.12.4"
+reqwest = "0.11.12"
+select = "0.5.0"
 tokio = { version = "1.37.0", features = ["full"] }
