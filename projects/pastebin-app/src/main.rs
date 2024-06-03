@@ -5,6 +5,7 @@ use rand::{thread_rng, Rng};
 use std::sync::Mutex;
 use actix_files::NamedFile;
 
+
 struct AppState {
     db: Mutex<Connection>,
 }
