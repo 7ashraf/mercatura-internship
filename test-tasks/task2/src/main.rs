@@ -13,6 +13,7 @@ enum Operation {
     Subtract(f64, f64),
     Multiply(f64, f64),
     Divide(f64, f64),
+    Unknown,
 }
 
 fn calculate(op: Operation) -> Result<f64, String> {
@@ -27,6 +28,7 @@ fn calculate(op: Operation) -> Result<f64, String> {
                 Ok(a / b)
             }
         }
+        Operation::Unknown => Err(String::from("Unknown operator"))
     }
 }
 
@@ -57,8 +59,9 @@ fn perform_calculation(conn: &Connection) -> Result<()> {
         "*" => Operation::Multiply(first_number, second_number),
         "/" => Operation::Divide(first_number, second_number),
         _ => {
-            println!("Invalid operation");
-            std::process::exit(1);
+            Operation::Unknown
+            // println!("Invalid operation");
+            // std::process::exit(1);
         }
     };
 
@@ -123,7 +126,7 @@ fn parse_f64(input: &str) -> Result<f64, String> {
     input.parse::<f64>().map_err(|_| format!("Failed to parse '{}' as a number", input))
 }
 fn view_past_results(conn: &Connection) -> Result<()> {
-    let mut stmt = conn.prepare("SELECT id, operation, num1, num2, result FROM calculations")?;
+    let mut stmt: rusqlite::Statement = conn.prepare("SELECT id, operation, num1, num2, result FROM calculations")?;
     let calculations_iter = stmt.query_map([], |row| {
         Ok(Calculation {
             id: row.get(0)?,

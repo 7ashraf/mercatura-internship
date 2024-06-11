@@ -7,9 +7,9 @@ fn concat_strings(s1: &str, s2:&str) -> String {
 }
 
 fn main() {
-    let s1 = "Hello, ";
+    let s1 = String::from("Hello, ");
     let s2 = "World!";
-    let s = concat_strings(s1, s2);
+    let s = concat_strings(&s1, &s2);
     println!("{}", s);
     
 }
