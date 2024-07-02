@@ -39,6 +39,23 @@ impl Product {
     }
 
     pub fn edit_product(&self, conn: &Connection) -> Result<()> {
+        let mut stmt = conn.prepare("SELECT COUNT(*) FROM products WHERE id = ?1")?;
+
+  
+        let product_exists: bool = stmt.query_row([self.id], |row| {
+            let count: i64 = row.get(0)?;
+            Ok(count > 0)
+        })?;
+        
+        if !product_exists {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
+        if self.price < 0.0 {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
+        if self.quantity < 0 {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
         conn.execute(
             "UPDATE products SET name = ?1, description = ?2, price = ?3, quantity = ?4 WHERE id = ?5",
             params![self.name, self.description, self.price, self.quantity, self.id],
@@ -47,6 +64,15 @@ impl Product {
     }
 
     pub fn delete_product(&self, conn: &Connection) -> Result<()> {
+        // Check if the product exists
+        let mut stmt = conn.prepare("SELECT COUNT(*) FROM products WHERE id = ?1")?;
+        let product_exists: bool = stmt.query_row([self.id], |row| {
+            let count: i64 = row.get(0)?;
+            Ok(count > 0)
+        })?;
+        if !product_exists {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
         conn.execute("DELETE FROM products WHERE id = ?1", params![self.id])?;
         Ok(())
     }

@@ -22,11 +22,32 @@ impl Purchase {
     }
 
     pub fn add_purchase(&self, conn: &Connection) -> Result<Purchase> {
+        if self.quantity_purchased == 0 {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
+
+        // Check if the product exists in the inventory and get its current quantity
+        let mut stmt = conn.prepare("SELECT quantity FROM products WHERE id = ?1")?;
+        let quantity: u32 = stmt.query_row([self.product_id], |row| row.get(0)).unwrap_or(0);
+
+        // Check if there is enough quantity available
+        if quantity < self.quantity_purchased {
+            return Err(rusqlite::Error::InvalidQuery);
+        }
+
+
         conn.execute(
             "INSERT INTO purchases (product_id, quantity_purchased, purchase_price) VALUES (?1, ?2, ?3)",
             params![self.product_id, self.quantity_purchased, self.purchase_price],
         )?;
         let id = conn.last_insert_rowid();
+
+        // Update the inventory
+        let new_quantity = quantity - self.quantity_purchased;
+        conn.execute(
+            "UPDATE products SET quantity = ?1 WHERE id = ?2",
+            params![new_quantity, self.product_id],
+        )?;
         Ok(Purchase { id: id as i32, ..self.clone() })
     }
 

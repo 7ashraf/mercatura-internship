@@ -37,22 +37,39 @@ fn parse_i32(input: &str) -> Result<i32, rusqlite::Error> {
 }
 
 fn add_product(conn: &Connection) -> Result<(), rusqlite::Error>{
-    //should add ? to the end of the function call
     let name = read_input("Enter the name of the product: ")?;
     let description = read_input("Enter the description of the product: ")?;
-    let price = read_input("Enter the price of the product: ")
-        .and_then(|input| parse_f64(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
+    // let price = read_input("Enter the price of the product: ")
+    //     .and_then(|input| parse_f64(&input))
+    //     .unwrap_or_else(|err| {
+    //         print!("reached");
+    //         println!("{}", err);
             
-            std::process::exit(1);
-        });
-    let quantity = read_input("Enter the quantity of the product: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    //         std::process::exit(1);
+    //     });
+
+    let price = loop{
+        let input = read_input("Enter the price of the product: ")?;
+        match parse_f64(&input) {
+            Ok(value) => break value,
+            Err(err) => println!("{}", err),
+        }
+    };
+    // let quantity = read_input("Enter the quantity of the product: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+
+        let quantity = loop{
+            let input = read_input("Enter the quantity of the product: ")?;
+            match parse_u32(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
+    
 
     let product = Product::new(0, name, description, price, quantity);
     product.add_product(conn)?;
@@ -62,43 +79,84 @@ fn add_product(conn: &Connection) -> Result<(), rusqlite::Error>{
 
 
 fn edit_product(conn: &Connection) -> rusqlite::Result<()> {
-    let id = read_input("Enter the ID of the product to edit: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        }) as i32;
+    // let id = read_input("Enter the ID of the product to edit: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     }) as i32;
+
+    let id = loop{
+        let input = read_input("Enter the ID of the product to edit: ")?;
+        match parse_u32(&input) {
+            Ok(value) => break value,
+            Err(err) => println!("{}", err),
+        }
+    } as i32;
 
     let name = read_input("Enter the new name of the product: ")?;
     let description = read_input("Enter the new description of the product: ")?;
-    let price = read_input("Enter the new price of the product: ")
-        .and_then(|input| parse_f64(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
-    let quantity = read_input("Enter the new quantity of the product: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    // let price = read_input("Enter the new price of the product: ")
+    //     .and_then(|input| parse_f64(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+        let price = loop{
+            let input = read_input("Enter the new price of the product: ")?;
+            match parse_f64(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
+    // let quantity = read_input("Enter the new quantity of the product: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+
+    let quantity = loop{
+        let input = read_input("Enter the quantity of the product: ")?;
+        match parse_u32(&input) {
+            Ok(value) => break value,
+            Err(err) => println!("{}", err),
+        }
+    };
 
     let product = Product::new(id, name, description, price, quantity);
-    product.edit_product(conn)?;
+    //q what if product does not exist
+    //fixed
+    match product.edit_product(conn){
+        Ok(_) => println!("Product edited successfully"),
+        Err(err) => println!("{}", err),
+    }
+    //product.edit_product(conn)?;
     Ok(())
 }
 
 fn delete_product(conn: &Connection) -> rusqlite::Result<()> {
-    let id = read_input("Enter the ID of the product to delete: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        }) as i32;
+    // let id = read_input("Enter the ID of the product to delete: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     }) as i32;
+
+    
+        let id = loop{
+            let input = read_input("Enter the ID of the product to edit: ")?;
+            match parse_u32(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        } as i32;
 
     let product = Product::new(id, String::new(), String::new(), 0.0, 0);
-    product.delete_product(conn)?;
+    match product.delete_product(conn){
+        Ok(_) => println!("Product deleted successfully"),
+        Err(err) => println!("{}", err),
+    }
     Ok(())
 }
 
@@ -164,30 +222,57 @@ fn inventory_management(conn: &Connection) -> rusqlite::Result<()> {
 }
 
 fn record_sale(conn: &Connection) -> Result<(), rusqlite::Error> {
-    let product_id = read_input("Enter the product ID: ")
-        .and_then(|input| parse_i32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    // let product_id = read_input("Enter the product ID: ")
+    //     .and_then(|input| parse_i32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
 
-    let quantity_sold = read_input("Enter the quantity sold: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    let product_id = loop{
+        let input = read_input("Enter the product ID: ")?;
+        match parse_i32(&input) {
+            Ok(value) => break value,
+            Err(err) => println!("{}", err),
+        }
 
-    let sale_price = read_input("Enter the sale price: ")
-        .and_then(|input| parse_f64(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    };
+
+    // let quantity_sold = read_input("Enter the quantity sold: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+
+        let quantity_sold = loop {
+            let input = read_input("Enter the quantity sold: ")?;
+            match parse_u32(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
+
+    // let sale_price = read_input("Enter the sale price: ")
+    //     .and_then(|input| parse_f64(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+
+        let sale_price = loop {
+            let input = read_input("Enter the sale price: ")?;
+            match parse_f64(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
 
     let sale = Sale::new(0, product_id, quantity_sold, sale_price);
-    let added_sale = sale.add_sale(conn)?;
-    println!("Sale recorded with ID: {}", added_sale.id);
+    match sale.add_sale(conn) {
+        Ok(val) => println!("Sale recorded successfully"),
+        Err(err) => println!("{}", err),
+    }
     Ok(())
 }
 
@@ -213,11 +298,10 @@ fn sales_management(conn: &Connection) -> rusqlite::Result<()> {
 
         match choice.trim() {
             "1" => {
-                // implement record_sale function and call here
+
                 record_sale(conn)?;
             }
             "2" => {
-                // implement view_sales function and call here
                 view_sales(conn)?;
             }
             "3" => break,
@@ -229,30 +313,56 @@ fn sales_management(conn: &Connection) -> rusqlite::Result<()> {
 }
 
 fn record_purchase(conn: &Connection) -> Result<(), rusqlite::Error> {
-    let product_id = read_input("Enter the product ID: ")
-        .and_then(|input| parse_i32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    // let product_id = read_input("Enter the product ID: ")
+    //     .and_then(|input| parse_i32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+        let product_id = loop {
+            let input = read_input("Enter the product ID: ")?;
+            match parse_i32(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
 
-    let quantity_purchased = read_input("Enter the quantity purchased: ")
-        .and_then(|input| parse_u32(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+    // let quantity_purchased = read_input("Enter the quantity purchased: ")
+    //     .and_then(|input| parse_u32(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
 
-    let purchase_price = read_input("Enter the purchase price: ")
-        .and_then(|input| parse_f64(&input))
-        .unwrap_or_else(|err| {
-            println!("{}", err);
-            std::process::exit(1);
-        });
+        let quantity_purchased = loop {
+            let input = read_input("Enter the quantity purchased: ")?;
+            match parse_u32(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
+    
+
+    // let purchase_price = read_input("Enter the purchase price: ")
+    //     .and_then(|input| parse_f64(&input))
+    //     .unwrap_or_else(|err| {
+    //         println!("{}", err);
+    //         std::process::exit(1);
+    //     });
+
+        let purchase_price = loop {
+            let input = read_input("Enter the purchase price: ")?;
+            match parse_f64(&input) {
+                Ok(value) => break value,
+                Err(err) => println!("{}", err),
+            }
+        };
 
     let purchase = Purchase::new(0, product_id, quantity_purchased, purchase_price);
-    let added_purchase = purchase.add_purchase(conn)?;
-    println!("Purchase recorded with ID: {}", added_purchase.id);
+    match purchase.add_purchase(conn) {
+        Ok(val) => println!("Purchase recorded successfully"),
+        Err(err) => println!("{}", err),
+    }
     Ok(())
 }
 
