@@ -14,6 +14,25 @@ use std::io::{self, Write};
 use rusqlite::{Error, Result};
 
 
+fn read_password(prompt: &str) -> Result<String, std::io::Error> {
+    print!("{}", prompt);
+    io::stdout().flush()?;
+    let mut input = String::new();
+    io::stdin().read_line(&mut input)?;
+    Ok(input.trim().to_string())
+}
+
+fn validate_password() -> bool {
+    // For simplicity, we're using a hardcoded password. In a real application,
+    // you might want to hash and store the password securely.
+    let correct_password = "securepassword";
+    let entered_password = match read_password("Enter password: ") {
+        Ok(pw) => pw,
+        Err(_) => return false,
+    };
+    entered_password == correct_password
+}
+
 fn read_input(prompt: &str) -> Result<String> {
     print!("{}", prompt);
     io::stdout().flush();
@@ -202,15 +221,12 @@ fn inventory_management(conn: &Connection) -> rusqlite::Result<()> {
         match choice.trim() {
             "1" => add_product(conn)?,
             "2" => {
-                // implement edit_product function and call here
                 edit_product(conn)?;
             }
             "3" => {
-                // implement delete_product function and call here
                 delete_product(conn)?;
             }
             "4" => {
-                // implement list_products function and call here
                 list_products(conn)?;
             }
             "5" => break,
@@ -470,9 +486,21 @@ fn main() -> rusqlite::Result<()> {
 
         match choice.trim() {
             "1" => inventory_management(&conn)?,
-            "2" => sales_management(&conn)?,
+            "2" => {
+                if validate_password() {
+                    sales_management(&conn)?;
+                } else {
+                    println!("Invalid password.");
+                }
+            },
             "3" => purchase_management(&conn)?,
-            "4" => reporting(&conn)?,
+            "4" => {
+                if validate_password() {
+                    reporting(&conn)?;
+                } else {
+                    println!("Invalid password.");
+                }
+            },
             "5" => break,
             _ => println!("Invalid choice"),
         }

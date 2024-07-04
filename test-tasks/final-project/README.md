@@ -10,7 +10,7 @@ This is a simple command-line Product Inventory Management System written in Rus
   - Delete a product
   - View all products
 
-- **Sales Management**
+- **Sales Management** (Password Protected)
   - Record sales transactions
   - Calculate and display the total sales and profit for each transaction
 
@@ -18,8 +18,12 @@ This is a simple command-line Product Inventory Management System written in Rus
   - Record purchase transactions
   - Calculate and display the total cost of each purchase
 
-- **Reporting**
+- **Reporting** (Password Protected)
   - Generate reports showing the store's inventory, sales, and purchase history
+
+## Security
+
+Sales Management and Reporting functionalities are password protected. The default password is `securepassword`.
 
 ## Project Structure
 
@@ -42,8 +46,8 @@ The project is structured with each functionality separated into its own service
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/7ashraf/mercatura-internship.git
-    cd .\test-tasks\final-project\
+    git clone https://github.com/yourusername/product-inventory-management.git
+    cd product-inventory-management
     ```
 
 2. Install dependencies:
@@ -61,9 +65,9 @@ The project is structured with each functionality separated into its own service
 When you run the application, you will be prompted with a menu to choose from the following options:
 
 1. Inventory Management
-2. Sales Management
+2. Sales Management (Password Protected)
 3. Purchase Management
-4. Reporting
+4. Reporting (Password Protected)
 5. Exit
 
 Each menu option will further guide you through the available functionalities.
