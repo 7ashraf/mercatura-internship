@@ -46,8 +46,7 @@ The project is structured with each functionality separated into its own service
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/product-inventory-management.git
-    cd product-inventory-management
+    git clone https://github.com/7ashraf/mercatura-internship/tree/main/test-tasks/final-project
     ```
 
 2. Install dependencies:
