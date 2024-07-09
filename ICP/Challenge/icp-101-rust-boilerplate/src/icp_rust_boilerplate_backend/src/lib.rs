@@ -36,12 +36,21 @@ struct Order {
 }
 
 #[derive(candid::CandidType, Clone, Serialize, Deserialize, Default)]
-
 struct Shipment {
     id: u64,
     order_id: u64,
-    shipped_date: u64,
-    expected_arrival_date: u64,
+    shipping_details: String,
+    status: ShipmentStatus,
+    created_at: u64,
+    updated_at: Option<u64>,
+    location_proofs: Vec<LocationProof>,
+}
+
+#[derive(candid::CandidType, Clone, Serialize, Deserialize, Default, Debug)]
+struct LocationProof {
+    timestamp: u64,
+    location_data: String,
+    verifier: String,
 }
 
 impl Storable for Product {
@@ -219,6 +228,16 @@ struct ShipmentPayload {
     order_id: u64,
     shipped_date: u64,
     expected_arrival_date: u64,
+    shipping_details: String,
+}
+#[derive(candid::CandidType, Deserialize, Serialize, Clone, Debug, Default)]
+enum ShipmentStatus {
+    #[default]
+    Pending,
+    Shipped,
+    InTransit,
+    Delivered,
+    Canceled,
 }
 
 
@@ -422,12 +441,15 @@ fn add_shipment(payload: ShipmentPayload) -> Result<Shipment, String> {
             let current_value = *counter.borrow().get();
             counter.borrow_mut().set(current_value + 1).expect("Cannot increment shipment ID counter")
         });
-    let shipment = Shipment {
-        id,
-        order_id: payload.order_id,
-        shipped_date: payload.shipped_date,
-        expected_arrival_date: payload.expected_arrival_date,
-    };
+        let shipment = Shipment {
+            id,
+            order_id: payload.order_id,
+            shipping_details: payload.shipping_details,
+            status: ShipmentStatus::Pending,
+            created_at: time(),
+            updated_at: None,
+            location_proofs: vec![],
+        };
     do_insert_shipment(&shipment);
     Ok(shipment)
 }
@@ -437,17 +459,30 @@ fn do_insert_shipment(shipment: &Shipment) {
 }
 
 
+
 #[ic_cdk::update]
-fn update_shipment(id: u64, payload: ShipmentPayload) -> Result<Shipment, String> {
-    match SHIPMENT_STORAGE.with(|service| service.borrow().get(&id)) {
+fn update_shipment_status(id: u64, status: ShipmentStatus, proof: LocationProof) -> Result<Shipment, Error> {
+    match _get_shipment(&id) {
         Some(mut shipment) => {
-            shipment.order_id = payload.order_id;
-            shipment.shipped_date = payload.shipped_date;
-            shipment.expected_arrival_date = payload.expected_arrival_date;
+            shipment.status = status;
+            shipment.updated_at = Some(time());
+            shipment.location_proofs.push(proof);
             do_insert_shipment(&shipment);
             Ok(shipment)
         }
-        None => Err(format!("Couldn't update shipment with id={}. Shipment not found", id)),
+        None => Err(Error::NotFound {
+            msg: format!("A shipment with id={} not found", id),
+        }),
+    }
+}
+
+#[ic_cdk::query]
+fn get_shipment_status(id: u64) -> Result<ShipmentStatus, Error> {
+    match _get_shipment(&id) {
+        Some(shipment) => Ok(shipment.status),
+        None => Err(Error::NotFound {
+            msg: format!("A shipment with id={} not found", id),
+        }),
     }
 }
 #[ic_cdk::update]
@@ -455,6 +490,16 @@ fn delete_shipment(id: u64) -> Result<Shipment, String> {
     match SHIPMENT_STORAGE.with(|service| service.borrow_mut().remove(&id)) {
         Some(shipment) => Ok(shipment),
         None => Err(format!("Couldn't delete shipment with id={}. Shipment not found.", id)),
+    }
+}
+
+#[ic_cdk::query]
+fn get_shipment_location_proofs(id: u64) -> Result<Vec<LocationProof>, Error> {
+    match _get_shipment(&id) {
+        Some(shipment) => Ok(shipment.location_proofs),
+        None => Err(Error::NotFound {
+            msg: format!("A shipment with id={} not found", id),
+        }),
     }
 }
 ic_cdk::export_candid!();
