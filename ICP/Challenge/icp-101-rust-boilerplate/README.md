@@ -217,6 +217,40 @@ fn get_shipment_location_proofs(id: u64) -> Result<Vec<LocationProof>, Error> {
 
 ## Installation and Deployment
 
+### Requirements
+* rustc 1.64 or higher
+```bash
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+$ source "$HOME/.cargo/env"
+```
+* rust wasm32-unknown-unknown target
+```bash
+$ rustup target add wasm32-unknown-unknown
+```
+* candid-extractor
+```bash
+$ cargo install candid-extractor
+```
+* install `dfx`
+```bash
+$ DFX_VERSION=0.15.0 sh -ci "$(curl -fsSL https://sdk.dfinity.org/install.sh)"
+$ echo 'export PATH="$PATH:$HOME/bin"' >> "$HOME/.bashrc"
+$ source ~/.bashrc
+$ dfx start --background
+
+## Running the project locally
+
+If you want to test the project locally, you can use the following commands:
+
+```bash
+# Starts the replica, running in the background
+$ dfx start --background
+
+# Deploys your canisters to the replica and generates your candid interface
+$ dfx deploy
+```
+
+
    ```sh
 ./did.sh && dfx generate && dfx deploy -y
    ```
