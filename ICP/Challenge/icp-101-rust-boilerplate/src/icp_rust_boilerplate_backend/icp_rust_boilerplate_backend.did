@@ -1,0 +1,67 @@
+type Order = record {
+  id : nat64;
+  delivery_date : opt nat64;
+  product_id : nat64;
+  order_date : nat64;
+  quantity : nat32;
+};
+type OrderPayload = record {
+  delivery_date : opt nat64;
+  product_id : nat64;
+  order_date : nat64;
+  quantity : nat32;
+};
+type Product = record {
+  id : nat64;
+  name : text;
+  description : text;
+  quantity : nat32;
+  price : float64;
+};
+type ProductPayload = record {
+  name : text;
+  description : text;
+  quantity : nat32;
+  price : float64;
+};
+type Result = variant { Ok : Order; Err : text };
+type Result_1 = variant { Ok : Product; Err : text };
+type Result_2 = variant { Ok : Shipment; Err : text };
+type Result_3 = variant { Ok : User; Err : text };
+type Shipment = record {
+  id : nat64;
+  expected_arrival_date : nat64;
+  shipped_date : nat64;
+  order_id : nat64;
+};
+type ShipmentPayload = record {
+  expected_arrival_date : nat64;
+  shipped_date : nat64;
+  order_id : nat64;
+};
+type User = record {
+  id : nat64;
+  username : text;
+  role : UserRole;
+  email : text;
+};
+type UserPayload = record { username : text; role : UserRole; email : text };
+type UserRole = variant { Customer; Supplier; Admin };
+service : {
+  add_order : (OrderPayload) -> (Result);
+  add_product : (ProductPayload) -> (Result_1);
+  add_shipment : (ShipmentPayload) -> (Result_2);
+  add_user : (UserPayload) -> (Result_3);
+  delete_order : (nat64) -> (Result);
+  delete_product : (nat64) -> (Result_1);
+  delete_shipment : (nat64) -> (Result_2);
+  delete_user : (nat64) -> (Result_3);
+  get_order : (nat64) -> (Result) query;
+  get_product : (nat64) -> (Result_1) query;
+  get_shipment : (nat64) -> (Result_2) query;
+  get_user : (nat64) -> (Result_3) query;
+  update_order : (nat64, OrderPayload) -> (Result);
+  update_product : (nat64, ProductPayload) -> (Result_1);
+  update_shipment : (nat64, ShipmentPayload) -> (Result_2);
+  update_user : (nat64, UserPayload) -> (Result_3);
+}
