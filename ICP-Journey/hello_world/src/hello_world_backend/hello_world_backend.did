@@ -1,0 +1,4 @@
+service : {
+  cast_vote : (text) -> (opt nat64);
+  get_votes : () -> (vec record { text; nat64 }) query;
+}
