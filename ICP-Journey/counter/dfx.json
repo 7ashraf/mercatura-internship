@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "counter_backend": {
+      "candid": "src/counter_backend/counter_backend.did",
+      "package": "counter_backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

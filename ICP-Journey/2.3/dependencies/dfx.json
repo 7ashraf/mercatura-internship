@@ -1,0 +1,33 @@
+{
+  "canisters": {
+    "dependencies_backend": {
+      "candid": "src/dependencies_backend/dependencies_backend.did",
+      "package": "dependencies_backend",
+      "type": "rust",
+      "dependencies": [
+                "internet_identity"
+            ]
+    },
+    "internet_identity": {
+      "type": "pull",
+      "id": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+  },
+    "dependencies_frontend": {
+      "dependencies": [
+        "dependencies_backend"
+      ],
+      "source": [
+        "src/dependencies_frontend/assets"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
