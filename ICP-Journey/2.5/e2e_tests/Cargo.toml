@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/e2e_tests_backend"
+]
+resolver = "2"

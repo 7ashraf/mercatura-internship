@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "isomorphic-fetch": "^3.0.0",
+    "vitest": "^2.0.5"
+  },
+  "scripts": {
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@dfinity/agent": "^2.0.0",
+    "@dfinity/principal": "^2.0.0"
+  },
+  "ci": "vitest run",
+"preci": "dfx stop; dfx start --clean --background; dfx deploy; dfx generate"
+}
