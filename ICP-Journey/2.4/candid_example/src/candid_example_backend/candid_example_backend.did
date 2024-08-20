@@ -1,0 +1,5 @@
+service : {
+  add: (nat) -> ();
+  get: () -> (nat) query;
+  subtract: (nat) -> ();
+}

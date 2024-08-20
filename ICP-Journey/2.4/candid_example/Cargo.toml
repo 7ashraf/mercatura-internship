@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/candid_example_backend"
+]
+resolver = "2"

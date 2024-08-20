@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "candid_example_backend": {
+      "candid": "src/candid_example_backend/candid_example_backend.did",
+      "package": "candid_example_backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
