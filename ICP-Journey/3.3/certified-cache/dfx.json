@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "certified-cache-backend": {
+      "candid": "src/certified-cache-backend/certified-cache-backend.did",
+      "package": "certified-cache-backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

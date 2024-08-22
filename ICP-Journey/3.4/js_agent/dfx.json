@@ -1,0 +1,17 @@
+{
+  "canisters": {
+    "js_agent_backend": {
+      "candid": "src/js_agent_backend/js_agent_backend.did",
+      "package": "js_agent_backend",
+      "type": "rust"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
