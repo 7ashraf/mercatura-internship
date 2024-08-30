@@ -1,0 +1,34 @@
+{
+  "canisters": {
+    "auth_client_rust_backend": {
+      "candid": "src/auth_client_rust_backend/auth_client_rust_backend.did",
+      "package": "auth_client_rust_backend",
+      "type": "rust",
+      "dependencies": [
+                "internet_identity"
+            ]
+    },
+    "internet_identity": {
+      "type": "pull",
+      "id": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+  },
+    "auth_client_rust_frontend": {
+      "dependencies": [
+        "auth_client_rust_backend"
+      ],
+      "source": [
+        "src/auth_client_rust_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "auth_client_rust_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
