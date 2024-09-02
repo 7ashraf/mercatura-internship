@@ -1,0 +1,11 @@
+type Permission = variant { Lowest; Assign_Role };
+type Role = variant { Authorized; Admin; Owner };
+service : {
+  assign_role : (principal, Role) -> ();
+  get_role : () -> (Role) query;
+  greet : (text) -> (text) query;
+  has_permission : (Role, Permission) -> (bool) query;
+  init : () -> ();
+  my_role : () -> (Role) query;
+  set_owner : () -> ();
+}
