@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/icp_ledger_canister_backend"
+]
+resolver = "2"

@@ -1,0 +1,10 @@
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/release/deps/libserde_tokenstream-d60622a61962bf03.rmeta: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ibidem.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ordered_map.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/serde_tokenstream.rs
+
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/release/deps/libserde_tokenstream-d60622a61962bf03.rlib: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ibidem.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ordered_map.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/serde_tokenstream.rs
+
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/release/deps/serde_tokenstream-d60622a61962bf03.d: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ibidem.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ordered_map.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/serde_tokenstream.rs
+
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/lib.rs:
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ibidem.rs:
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/ordered_map.rs:
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_tokenstream-0.2.1/src/serde_tokenstream.rs:

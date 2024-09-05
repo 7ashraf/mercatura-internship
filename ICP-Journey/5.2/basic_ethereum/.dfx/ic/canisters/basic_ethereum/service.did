@@ -1,0 +1,24 @@
+type BlockTag = variant {
+  Earliest;
+  Safe;
+  Finalized;
+  Latest;
+  Number : nat;
+  Pending;
+};
+type EcdsaKeyName = variant {
+  ProductionKey1;
+  TestKeyLocalDevelopment;
+  TestKey1;
+};
+type EthereumNetwork = variant { Mainnet; Sepolia };
+type InitArg = record {
+  ethereum_network : opt EthereumNetwork;
+  ecdsa_key_name : opt EcdsaKeyName;
+};
+type Wei = nat;
+service : {
+  ethereum_address : (opt principal) -> (text);
+  send_eth : (text, Wei) -> (text);
+  transaction_count : (opt principal, opt BlockTag) -> (nat);
+}

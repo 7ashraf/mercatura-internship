@@ -1,0 +1,9 @@
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-842288bd515ff084.rmeta: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/queue.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/task/singlethread.rs
+
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/wasm32-unknown-unknown/release/deps/libwasm_bindgen_futures-842288bd515ff084.rlib: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/queue.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/task/singlethread.rs
+
+/home/ashraf/projects/mercatura-internship/ICP-Journey/5.2/basic_ethereum/target/wasm32-unknown-unknown/release/deps/wasm_bindgen_futures-842288bd515ff084.d: /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/lib.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/queue.rs /home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/task/singlethread.rs
+
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/lib.rs:
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/queue.rs:
+/home/ashraf/.cargo/registry/src/index.crates.io-6f17d22bba15001f/wasm-bindgen-futures-0.4.42/src/task/singlethread.rs:
