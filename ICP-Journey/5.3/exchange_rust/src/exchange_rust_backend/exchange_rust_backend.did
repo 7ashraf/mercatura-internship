@@ -1,3 +1,28 @@
+type DepositErr = variant { TransferFailure; BalanceLow };
+type Result = variant { Ok : nat; Err : TransferFromError };
+type Result_1 = variant { Ok : nat; Err : DepositErr };
+type TransferFromError = variant {
+  GenericError : record { message : text; error_code : nat };
+  TemporarilyUnavailable;
+  InsufficientAllowance : record { allowance : nat };
+  BadBurn : record { min_burn_amount : nat };
+  Duplicate : record { duplicate_of : nat };
+  BadFee : record { expected_fee : nat };
+  CreatedInFuture : record { ledger_time : nat64 };
+  TooOld;
+  InsufficientFunds : record { balance : nat };
+};
+type init_args = record { token_a : principal; token_b : principal };
 service : {
-    "greet": (text) -> (text) query;
+  deposit_token_A : () -> (Result);
+  deposit_token_B : () -> (Result);
+  get_balances : () -> (
+      vec record { principal; nat },
+      vec record { principal; nat },
+    ) query;
+  greet : (text) -> (text) query;
+  init : (init_args) -> ();
+  swap : (principal, principal) -> ();
+  withdraw_token_A : (nat) -> (Result_1);
+  withdraw_token_B : (nat) -> (Result_1);
 }
