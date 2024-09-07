@@ -1,0 +1,5 @@
+.dfx/
+dist/
+node_modules/
+src/declarations/
+target/

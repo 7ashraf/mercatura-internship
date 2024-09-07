@@ -1,0 +1,49 @@
+{
+    "canisters": {
+        "backend": {
+            "build": "npx azle backend",
+            "candid": "src/typescript_backend/backend.did",
+            "candid_gen": "custom",
+            "declarations": {
+                "node_compatibility": true
+            },
+            "gzip": true,
+            "main": "src/typescript_backend/src/index.ts",
+            "type": "custom",
+            "wasm": ".azle/backend/backend.wasm",
+            "metadata": [
+                {
+                    "name": "candid:service",
+                    "path": "src/typescript_backend/backend.did"
+                },
+                {
+                    "name": "cdk:name",
+                    "content": "azle"
+                }
+            ]
+        },
+        "frontend": {
+            "dependencies": [
+                "backend"
+            ],
+            "type": "assets",
+            "frontend": {
+                "entrypoint": "dist/index.html"
+            },
+            "source": [
+                "dist/"
+            ]
+        },
+        "internet_identity": {
+            "type": "custom",
+            "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+            "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz",
+            "remote": {
+                "id": {
+                    "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+                }
+            },
+            "frontend": {}
+        }
+    }
+}
